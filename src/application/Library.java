@@ -1,8 +1,8 @@
 package application;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Library 
 {
@@ -11,16 +11,33 @@ public class Library
 		try
 		{
 			FileInputStream input = new FileInputStream("lib.txt");
-			InputStreamReader reader = new InputStreamReader(input, "UTF-8");
+			InputStreamReader r = new InputStreamReader(input, "UTF-8");
+			BufferedReader bReader = new BufferedReader(r);
+
+			String l;
+			ArrayList<Song> out = new ArrayList<>();
+
+			while ((l = bReader.readLine()) != null)
+			{
+				String[] tempArr = l.split("|");
+
+				Song s = new Song(tempArr[0], tempArr[1], tempArr[2]);
+
+				out.add(s);
+
+			}
+			return out;
+
 
 
 		}
 		catch (IOException e)
 		{
 			System.out.println("IO Exception");
+			return null;
 		}
 
-		return null;
+
 	}
 	
 	static void addToList(Song s)
