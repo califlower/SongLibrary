@@ -1,5 +1,4 @@
 package application;
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -23,14 +22,16 @@ public class SongLib extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-        
+
+
+
         ListView<String> list = (ListView) root.lookup("#songList");
         
         ObservableList<String> items =FXCollections.observableArrayList (
         	    "Single", "Double", "Suite", "Family App");
         	list.setItems(items);
-        	
 
+		list.getSelectionModel().select(0);
 
 	}
 
