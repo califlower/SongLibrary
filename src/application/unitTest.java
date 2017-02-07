@@ -1,19 +1,47 @@
 package application;
 
-
-/**
- * Created by cal13 on 2/7/2017.
- */
 public class unitTest
 {
 
-    public void testAll
+    public static void testAll()
     {
         Song s = new Song();
 
         if (s.getName().compareToIgnoreCase("") == 0)
-            System.out.println("GOOD")
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
+
+        if (s.getAlbum().compareToIgnoreCase("") == 0)
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
+
+        if (s.getArtist().compareToIgnoreCase("") == 0)
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
 
 
+        s.setName("Test");
+        s.setAlbum("Test");
+        s.setArtist("Test");
+
+        if (s.getName().compareToIgnoreCase("Test") == 0)
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
+
+
+        if (s.getAlbum().compareToIgnoreCase("Test") == 0)
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
+
+
+        if (s.getArtist().compareToIgnoreCase("Test") == 0)
+            System.out.println("GOOD");
+        else
+            System.out.println("Failed");
     }
 }
