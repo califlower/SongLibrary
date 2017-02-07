@@ -1,6 +1,6 @@
 package application;
 
-public interface songInterface 
+public interface songInterface  
 {
 	void setName (String name);
 	

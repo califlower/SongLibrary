@@ -26,6 +26,7 @@ public class Library
 				out.add(s);
 
 			}
+
 			return out;
 
 
@@ -44,11 +45,23 @@ public class Library
 	{
 		try
 		{
-			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", true), "UTF-8");
+			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
 
 			BufferedWriter bWriter = new BufferedWriter(w);
-			bWriter.write(s.toString());
+
+			/*Get old list, add then sort */
+			ArrayList<Song> n = getList();
+
+			if (n == null)
+				n = new ArrayList<Song>();
+			n.add(s);
+			Collections.sort(n);
+
+			for (Song x : n)
+				bWriter.write(x.toString());
+
 			bWriter.close();
+
 		}
 		catch (IOException e)
 		{
@@ -57,8 +70,43 @@ public class Library
 	}
 	
 	
-	static void editSong(int i)
+	static void editSong(Song s, int i)
 	{
-		
+		ArrayList<Song> n = getList();
+
+		if (n == null)
+			n = new ArrayList<Song>();
+
+		n.remove(i);
+		n.add(s);
+
+		Collections.sort(n);
+
+
+		try
+		{
+			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
+
+			BufferedWriter bWriter = new BufferedWriter(w);
+
+			for (Song x : n)
+				bWriter.write(x.toString());
+
+			bWriter.close();
+
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Exception");
+		}
+
+
+
+
+
+
+
+
+
 	}
 }
