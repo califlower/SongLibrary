@@ -41,7 +41,7 @@ public class Library
 
 	}
 	
-	static void addToList(Song s)
+	static void addSong(Song s)
 	{
 		try
 		{

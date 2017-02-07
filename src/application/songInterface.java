@@ -1,8 +1,8 @@
 package application;
 
-public interface songInterface  
+public interface songInterface
 {
-	void setName (String name);
+	void  setName (String name);
 	
 	void setArtist(String artist);
 	
