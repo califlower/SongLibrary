@@ -48,23 +48,13 @@ public class unitTest
 
 
         Library.addSong(s);
-        s.setName("Test2");
-        Library.editSong(s,0);
-
-        ArrayList<Song> n = Library.getList();
 
 
-        if (n != null && n.size() == 1)
-            System.out.println("GOOD");
-        else
-            System.out.println("Failed");
 
-        if (n != null && n.get(0).getName().compareTo("Test2") == 0)
-            System.out.println("GOOD");
-        else
-            System.out.println("Failed");
 
-        
+
+
+
 
 
 

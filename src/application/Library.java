@@ -19,7 +19,7 @@ public class Library
 
 			while ((l = bReader.readLine()) != null)
 			{
-				String[] tempArr = l.split("|");
+				String[] tempArr = l.split("[|]");
 
 				Song s = new Song(tempArr[0], tempArr[1], tempArr[2]);
 
@@ -45,20 +45,25 @@ public class Library
 	{
 		try
 		{
-			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
+			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", true), "UTF-8");
 
 			BufferedWriter bWriter = new BufferedWriter(w);
 
 			/*Get old list, add then sort */
-			ArrayList<Song> n = getList();
+			ArrayList<Song> n = Library.getList();
+			System.out.println(n);
 
 			if (n == null)
 				n = new ArrayList<Song>();
+
 			n.add(s);
 			Collections.sort(n);
 
 			for (Song x : n)
+			{
 				bWriter.write(x.toString());
+				bWriter.newLine();
+			}
 
 			bWriter.close();
 
