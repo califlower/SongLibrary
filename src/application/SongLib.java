@@ -27,6 +27,8 @@ public class SongLib extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        unitTest.testAll();
+
 	}
 
 	public static void main(String[] args) 

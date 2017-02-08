@@ -8,6 +8,7 @@ public class Library
 {
 	static ArrayList<Song> getList()
 	{
+
 		try
 		{
 			FileInputStream input = new FileInputStream("lib.txt");
@@ -43,21 +44,21 @@ public class Library
 	
 	static void addSong(Song s)
 	{
+		/*Get old list, add then sort */
+
+		ArrayList<Song> n = Library.getList();
+
+		if (n == null)
+			n = new ArrayList<Song>();
+
+		n.add(s);
+		Collections.sort(n);
+
 		try
 		{
-			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", true), "UTF-8");
+			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
 
 			BufferedWriter bWriter = new BufferedWriter(w);
-
-			/*Get old list, add then sort */
-			ArrayList<Song> n = Library.getList();
-			System.out.println(n);
-
-			if (n == null)
-				n = new ArrayList<Song>();
-
-			n.add(s);
-			Collections.sort(n);
 
 			for (Song x : n)
 			{
