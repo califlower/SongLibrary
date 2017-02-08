@@ -68,6 +68,11 @@ public class Library
 			System.out.println("IO Exception");
 		}
 	}
+
+	static void removeSong(int i)
+	{
+		
+	}
 	
 	
 	static void editSong(Song s, int i)
