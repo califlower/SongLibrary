@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Library 
 {
-	static ArrayList<Song> getList()
+	public static ArrayList<Song> getList()
 	{
 
 		try
@@ -42,7 +42,7 @@ public class Library
 
 	}
 	
-	static void addSong(Song s)
+	public static void addSong(Song s)
 	{
 		/*Get old list, add then sort */
 
@@ -75,13 +75,13 @@ public class Library
 		}
 	}
 
-	static void removeSong(int i)
+	public static void removeSong(int i)
 	{
 		
 	}
 	
 	
-	static void editSong(Song s, int i)
+	public static void editSong(Song s, int i)
 	{
 		ArrayList<Song> n = getList();
 

@@ -10,18 +10,20 @@ import javafx.scene.control.ListView;
 
 public class Controller {
 	@FXML
-	ListView<String> songList;
-	private ObservableList<String> obsList;
+	ListView<Song> songList;
+	private ObservableList<Song> obsList;
 	
 	public void start() {
-	 obsList = FXCollections.observableArrayList ("Single", "Double", "Suite", "Family App"); // replace with getList() later
+	 obsList = FXCollections.observableArrayList (Library.getList());
 	 songList.setItems(obsList);
 	 songList.getSelectionModel().select(0);
 	}
 	
     public void addSong(ActionEvent event) {
-       Song s = new Song("test");
-       
+       Song s = new Song("test", "test", "test");
+       Library.addSong(s);
+       obsList = FXCollections.observableArrayList(Library.getList());
+       System.out.println("Yerr");
     }
 
 }
