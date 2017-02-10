@@ -22,7 +22,7 @@ public class Library
 			{
 				String[] tempArr = l.split("[|]");
 
-				Song s = new Song(tempArr[0], tempArr[1], tempArr[2]);
+				Song s = new Song(tempArr[0], tempArr[1], tempArr[2], tempArr[3]);
 
 				out.add(s);
 

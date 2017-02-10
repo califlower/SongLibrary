@@ -5,24 +5,40 @@ public class Song implements songInterface, Comparable<Song> {
         private String name;
 		private String artist;
 		private String album;
+		private String year;
 
 	public Song ()
 	{
 			this.name = "";
 			this.artist = "";
 			this.album = "";
+			this.year = "";
 	}
-	public Song(String name)
+	public Song(String name, String artist)
 	{
 		this.name = name;
-		this.artist = "";
+		this.artist = artist;
 		this.album = "";
+		this.year = "";
 	}
-	public Song(String name, String artist, String album)
+	public Song(String name, String artist, String s, int choice)
+	{
+		this.name = name;
+		this.artist = artist;
+		if(choice == 0){
+			this.album = s;
+			this.year = "";
+		}else{
+			this.album = "";
+			this.year = s;
+		}
+	}
+	public Song(String name, String artist, String album, String year)
 	{
 		this.name = name;
 		this.artist = artist;
 		this.album = album;
+		this.year = year;
 	}
 
 	@Override
@@ -40,6 +56,10 @@ public class Song implements songInterface, Comparable<Song> {
 	@Override
 	public void setAlbum(String album) {
 	    this.album = album;
+	}
+	@Override
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 	@Override
@@ -59,9 +79,16 @@ public class Song implements songInterface, Comparable<Song> {
     {
         return this.album;
 	}
+	
+	@Override
+	public String getYear()
+	{
+		return this.year;
+	}
+	
 	public String toString()
     {
-        return this.name + "|" + this.artist + "|" + this.album;
+        return this.name + "|" + this.artist + "|" + this.album + "|" + this.year;
     }
 
 	@Override

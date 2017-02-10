@@ -8,11 +8,15 @@ public interface songInterface
 	
 	void setAlbum (String album);
 	
+	void setYear (String Year);
+	
 	String getName();
 	
 	String getArtist();
 	
 	String getAlbum();
+	
+	String getYear();
 	
 	
 }
