@@ -6,6 +6,7 @@ import java.util.Collections;
 
 public class Library 
 {
+
 	public static ArrayList<Song> getList()
 	{
 
@@ -22,10 +23,12 @@ public class Library
 			{
 				String[] tempArr = l.split("[|]");
 
-				Song s = new Song(tempArr[0], tempArr[1], tempArr[2], tempArr[3]);
+				if (tempArr.length == 4)
+				{
+					Song s = new Song(tempArr[0].trim(), tempArr[1].trim(), tempArr[2].trim(), tempArr[3].trim());
 
-				out.add(s);
-
+					out.add(s);
+				}
 			}
 
 			return out;
@@ -77,10 +80,40 @@ public class Library
 
 	public static void removeSong(int i)
 	{
-		
-	}
-	
-	
+
+        ArrayList<Song> n = getList();
+
+
+        if (n == null)
+            n = new ArrayList<Song>();
+
+        if (i > n.size()-1 || i < 0 )
+            return;
+
+        n.remove(i);
+
+        Collections.sort(n);
+
+
+        try
+        {
+            OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
+
+            BufferedWriter bWriter = new BufferedWriter(w);
+
+            for (Song x : n)
+                bWriter.write(x.toString());
+
+            bWriter.close();
+
+        }
+        catch (IOException e)
+        {
+            System.out.println("IO Exception");
+        }
+
+    }
+
 	public static void editSong(Song s, int i)
 	{
 		ArrayList<Song> n = getList();
@@ -110,14 +143,6 @@ public class Library
 		{
 			System.out.println("IO Exception");
 		}
-
-
-
-
-
-
-
-
 
 	}
 }

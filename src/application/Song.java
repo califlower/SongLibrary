@@ -14,25 +14,7 @@ public class Song implements songInterface, Comparable<Song> {
 			this.album = "";
 			this.year = "";
 	}
-	public Song(String name, String artist)
-	{
-		this.name = name;
-		this.artist = artist;
-		this.album = "";
-		this.year = "";
-	}
-	public Song(String name, String artist, String s, int choice)
-	{
-		this.name = name;
-		this.artist = artist;
-		if(choice == 0){
-			this.album = s;
-			this.year = "";
-		}else{
-			this.album = "";
-			this.year = s;
-		}
-	}
+
 	public Song(String name, String artist, String album, String year)
 	{
 		this.name = name;
@@ -88,7 +70,7 @@ public class Song implements songInterface, Comparable<Song> {
 	
 	public String toString()
     {
-        return this.name + "|" + this.artist + "|" + this.album + "|" + this.year;
+        return this.name + "| " + this.artist + "| " + this.album + "| " + this.year;
     }
 
 	@Override

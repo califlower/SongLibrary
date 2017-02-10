@@ -33,7 +33,7 @@
                               </Label>
                               <Label layoutX="16.0" layoutY="63.0" prefHeight="17.0" prefWidth="42.0" text="Artist:" />
                               <Label layoutX="16.0" layoutY="89.0" prefHeight="17.0" prefWidth="43.0" text="Album:" />
-                              <Button fx:id="deleteButton" layoutX="66.0" layoutY="142.0" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="deleteButton" layoutX="66.0" layoutY="142.0" mnemonicParsing="false" text="Delete" onAction="#removeSong" />
                               <Label fx:id="songLabel" layoutX="66.0" layoutY="38.0" prefHeight="17.0" prefWidth="225.0" />
                               <Label fx:id="artistLabel" layoutX="66.0" layoutY="63.0" prefHeight="17.0" prefWidth="225.0" />
                               <Label fx:id="albumLabel" layoutX="66.0" layoutY="89.0" prefHeight="17.0" prefWidth="225.0" />
