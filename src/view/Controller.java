@@ -14,16 +14,22 @@ public class Controller {
 	private ObservableList<Song> obsList;
 	
 	public void start() {
-	 obsList = FXCollections.observableArrayList (Library.getList());
+	 obsList = FXCollections.observableArrayList(Library.getList());
 	 songList.setItems(obsList);
 	 songList.getSelectionModel().select(0);
 	}
 	
-    public void addSong(ActionEvent event) {
-       Song s = new Song("test", "test", "test");
+    public void addSong(ActionEvent event){
+       Song s = new Song("test", "test", "test"); //replace with text box inputs and prompt
+       //adding song to library text file
        Library.addSong(s);
-       obsList = FXCollections.observableArrayList(Library.getList());
-       System.out.println("Yerr");
+       //updating obsList -- this is kinda of a fake add, double check later
+       obsList.add(s);
     }
+    
+    public void removeSong(ActionEvent event){
+    	
+    }
+    
 
 }

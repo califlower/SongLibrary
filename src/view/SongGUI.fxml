@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
    <children>
-    <Button fx:id="addButton" layoutX="25.0" layoutY="21.0" mnemonicParsing="false" text="Add" onAction="#addSong"/>
-      <Button fx:id="deleteButton" layoutX="91.0" layoutY="21.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="editButton" layoutX="159.0" layoutY="21.0" mnemonicParsing="false" text="Edit" />
-      <ListView fx:id="songList" layoutY="65.0" minWidth="600.0" prefHeight="736.0" prefWidth="600.0" />
+      <SplitPane dividerPositions="0.5" layoutY="-1.0" prefHeight="800.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView fx:id="songList" minWidth="295.0" prefHeight="798.0" prefWidth="295.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.25" layoutX="-4.0" layoutY="1.0" orientation="VERTICAL" prefHeight="798.0" prefWidth="302.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="69.0" prefWidth="300.0">
+                           <children>
+                              <Button fx:id="editButton" layoutX="15.0" layoutY="142.0" mnemonicParsing="false" text="Edit" />
+                              <Label layoutX="16.0" layoutY="112.0" prefHeight="17.0" prefWidth="43.0" text="Year:" />
+                              <Label layoutX="15.0" layoutY="38.0" prefHeight="17.0" prefWidth="42.0" text="Song:" />
+                              <Label layoutX="113.0" layoutY="6.0" prefHeight="17.0" prefWidth="75.0" text="Song Detail" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="63.0" prefHeight="17.0" prefWidth="42.0" text="Artist:" />
+                              <Label layoutX="16.0" layoutY="89.0" prefHeight="17.0" prefWidth="43.0" text="Album:" />
+                              <Button fx:id="deleteButton" layoutX="66.0" layoutY="142.0" mnemonicParsing="false" text="Delete" />
+                              <Label id="songDetail" layoutX="66.0" layoutY="38.0" prefHeight="17.0" prefWidth="225.0" />
+                              <Label id="artistDetail" layoutX="66.0" layoutY="63.0" prefHeight="17.0" prefWidth="225.0" />
+                              <Label id="albumDetail" layoutX="66.0" layoutY="89.0" prefHeight="17.0" prefWidth="225.0" />
+                              <Label id="yearDetail" layoutX="66.0" layoutY="112.0" prefHeight="17.0" prefWidth="225.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                            <Button fx:id="addButton" layoutX="129.0" layoutY="177.0" mnemonicParsing="false" onAction="#addSong" text="Add" />
+                              <TextField layoutX="13.0" layoutY="39.0" prefHeight="27.0" prefWidth="274.0" promptText="Song Name" />
+                              <TextField layoutX="13.0" layoutY="73.0" prefHeight="27.0" prefWidth="274.0" promptText="Artist Name" />
+                              <TextField layoutX="13.0" layoutY="107.0" prefHeight="27.0" prefWidth="274.0" promptText="Album Name" />
+                              <TextField layoutX="13.0" layoutY="141.0" prefHeight="27.0" prefWidth="274.0" promptText="Year" />
+                              <Label layoutX="97.0" layoutY="6.0" prefHeight="17.0" prefWidth="106.0" text="Add a New Song" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>
