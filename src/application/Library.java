@@ -4,82 +4,79 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Library 
+public class Library
 {
 
-	public static ArrayList<Song> getList()
-	{
+    public static ArrayList<Song> getList()
+    {
 
-		try
-		{
-			FileInputStream input = new FileInputStream("lib.txt");
-			InputStreamReader r = new InputStreamReader(input, "UTF-8");
-			BufferedReader bReader = new BufferedReader(r);
+        try
+        {
+            FileInputStream input = new FileInputStream("lib.txt");
+            InputStreamReader r = new InputStreamReader(input, "UTF-8");
+            BufferedReader bReader = new BufferedReader(r);
 
-			String l;
-			ArrayList<Song> out = new ArrayList<>();
+            String l;
+            ArrayList<Song> out = new ArrayList<>();
 
-			while ((l = bReader.readLine()) != null)
-			{
-				String[] tempArr = l.split("[|]");
+            while ((l = bReader.readLine()) != null)
+            {
+                String[] tempArr = l.split("[|]");
 
-				if (tempArr.length == 4)
-				{
-					Song s = new Song(tempArr[0].trim(), tempArr[1].trim(), tempArr[2].trim(), tempArr[3].trim());
+                if (tempArr.length == 4)
+                {
+                    Song s = new Song(tempArr[0].trim(), tempArr[1].trim(), tempArr[2].trim(), tempArr[3].trim());
 
-					out.add(s);
-				}
-			}
+                    out.add(s);
+                }
+            }
 
-			return out;
-
-
-
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Exception");
-			return null;
-		}
+            return out;
 
 
-	}
-	
-	public static void addSong(Song s)
-	{
-		/*Get old list, add then sort */
+        } catch (IOException e)
+        {
+            System.out.println("IO Exception");
+            return null;
+        }
 
-		ArrayList<Song> n = Library.getList();
 
-		if (n == null)
-			n = new ArrayList<Song>();
+    }
 
-		n.add(s);
-		Collections.sort(n);
+    public static void addSong(Song s)
+    {
+        /*Get old list, add then sort */
 
-		try
-		{
-			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
+        ArrayList<Song> n = Library.getList();
 
-			BufferedWriter bWriter = new BufferedWriter(w);
+        if (n == null)
+            n = new ArrayList<Song>();
 
-			for (Song x : n)
-			{
-				bWriter.write(x.toString());
-				bWriter.newLine();
-			}
+        n.add(s);
+        Collections.sort(n);
 
-			bWriter.close();
+        try
+        {
+            OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
 
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Exception");
-		}
-	}
+            BufferedWriter bWriter = new BufferedWriter(w);
 
-	public static void removeSong(int i)
-	{
+            for (Song x : n)
+            {
+                bWriter.write(x.toString());
+                bWriter.newLine();
+            }
+
+            bWriter.close();
+
+        } catch (IOException e)
+        {
+            System.out.println("IO Exception");
+        }
+    }
+
+    public static void removeSong(int i)
+    {
 
         ArrayList<Song> n = getList();
 
@@ -87,7 +84,7 @@ public class Library
         if (n == null)
             n = new ArrayList<Song>();
 
-        if (i > n.size()-1 || i < 0 )
+        if (i > n.size() - 1 || i < 0)
             return;
 
         n.remove(i);
@@ -109,46 +106,44 @@ public class Library
 
             bWriter.close();
 
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             System.out.println("IO Exception");
         }
 
     }
 
-	public static void editSong(Song s, int i)
-	{
-		ArrayList<Song> n = getList();
+    public static void editSong(Song s, int i)
+    {
+        ArrayList<Song> n = getList();
 
-		if (n == null)
-			n = new ArrayList<>();
+        if (n == null)
+            n = new ArrayList<>();
 
-		n.remove(i);
-		n.add(s);
+        n.remove(i);
+        n.add(s);
 
-		Collections.sort(n);
+        Collections.sort(n);
 
 
-		try
-		{
-			OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
+        try
+        {
+            OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream("lib.txt", false), "UTF-8");
 
-			BufferedWriter bWriter = new BufferedWriter(w);
+            BufferedWriter bWriter = new BufferedWriter(w);
 
-			for (Song x : n)
+            for (Song x : n)
             {
                 bWriter.write(x.toString());
                 bWriter.newLine();
             }
 
-			bWriter.close();
+            bWriter.close();
 
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Exception");
-		}
+        } catch (IOException e)
+        {
+            System.out.println("IO Exception");
+        }
 
-	}
+    }
 }

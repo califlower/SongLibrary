@@ -12,34 +12,35 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Collections;
 import java.util.Optional;
 
-public class Controller {
-	// List View
-	@FXML
-	ListView<Song> songList;
-	private ObservableList<Song> obsList;
-	// Song Detail Labels
-	@FXML
-	private Label songLabel;
-	@FXML
-	private Label artistLabel;
-	@FXML
-	private Label albumLabel;
-	@FXML
-	private Label yearLabel;
-	// Add a New Song Text Fields
-	@FXML
-	private TextField songField;
-	@FXML
-	private TextField artistField;
-	@FXML
-	private TextField albumField;
-	@FXML
-	private TextField yearField;
-	
-	public void start()
-	{
+public class Controller
+{
+    // List View
+    @FXML
+    ListView<Song> songList;
+    private ObservableList<Song> obsList;
+    // Song Detail Labels
+    @FXML
+    private Label songLabel;
+    @FXML
+    private Label artistLabel;
+    @FXML
+    private Label albumLabel;
+    @FXML
+    private Label yearLabel;
+    // Add a New Song Text Fields
+    @FXML
+    private TextField songField;
+    @FXML
+    private TextField artistField;
+    @FXML
+    private TextField albumField;
+    @FXML
+    private TextField yearField;
 
-		obsList = FXCollections.observableArrayList(Library.getList());
+    public void start()
+    {
+
+        obsList = FXCollections.observableArrayList(Library.getList());
         songList.setItems(obsList);
 
 
@@ -52,8 +53,6 @@ public class Controller {
             artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
             albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
             yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
-
-
 
 
         }
@@ -74,11 +73,11 @@ public class Controller {
                 }
             }
         });
-	 
-	}
-	
-	private void songDetail()
-	{
+
+    }
+
+    private void songDetail()
+    {
         if (!obsList.isEmpty())
         {
 
@@ -87,24 +86,24 @@ public class Controller {
             if (x == null)
                 return;
 
-            if (x.getName()!=null)
+            if (x.getName() != null)
                 songLabel.setText(x.getName());
             else
                 songLabel.setText("");
 
 
-            if (x.getArtist()!=null)
+            if (x.getArtist() != null)
                 artistLabel.setText(x.getArtist());
             else
                 artistLabel.setText("");
 
 
-            if (x.getAlbum()!=null)
+            if (x.getAlbum() != null)
                 albumLabel.setText(x.getAlbum());
             else
                 albumLabel.setText("");
 
-            if (x.getYear()!=null)
+            if (x.getYear() != null)
                 yearLabel.setText(x.getYear());
             else
                 yearLabel.setText("");
@@ -125,22 +124,22 @@ public class Controller {
             }*/
 
         }
-	}
-	
+    }
+
     public void addSong(ActionEvent event)
     {
-    	Song s;
-    	if(songField.getText().isEmpty() || artistField.getText().isEmpty()){
-    		// Prompt user to enter a song name and/or artist name
-    		 Alert invalidInput = new Alert(AlertType.INFORMATION); 
-    		 //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
-    		 invalidInput.setTitle("Invalid Input");
-    		 invalidInput.setHeaderText("Unable to add song to the Song Library");
-    		 invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
-    		 invalidInput.showAndWait();
-    		 return;
-    	}
-    	else
+        Song s;
+        if (songField.getText().isEmpty() || artistField.getText().isEmpty())
+        {
+            // Prompt user to enter a song name and/or artist name
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Invalid Input");
+            invalidInput.setHeaderText("Unable to add song to the Song Library");
+            invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
+            invalidInput.showAndWait();
+            return;
+        } else
         {
             s = new Song(songField.getText(), artistField.getText(), albumField.getText(), yearField.getText());
         }
@@ -148,21 +147,20 @@ public class Controller {
 
     	
     	/* ADD A WAY TO CHECK FOR AN ATTEMPT TO ADD DUPLICATE ENTRIES; MAYBE TURN LIBRARY.ADDSONG TO CHECK AND RETURN A -1 IF FAILED
-    	 * CHECK RETURN VALUE OF LIBRARY.ADDSONG AND HANDLE WITH A PROMPT TO THE USER
+         * CHECK RETURN VALUE OF LIBRARY.ADDSONG AND HANDLE WITH A PROMPT TO THE USER
     	 */
-    	
-    	Library.addSong(s); // Adds song to library text file
-    	obsList.add(s); // Adds song to observable list whilst application is currently running
+
+        Library.addSong(s); // Adds song to library text file
+        obsList.add(s); // Adds song to observable list whilst application is currently running
 
         Collections.sort(obsList);
-
 
 
         if (obsList.size() == 1)
             songList.getSelectionModel().select(0); // Selecting first song as default
 
     }
-    
+
     public void removeSong(ActionEvent event)
     {
 
@@ -187,12 +185,11 @@ public class Controller {
                 yearLabel.setText("");
             }
 
-        }
-        else
+        } else
         {
             alert.close();
         }
     }
-    
+
 
 }
