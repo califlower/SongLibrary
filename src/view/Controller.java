@@ -27,6 +27,15 @@ public class Controller
     private Label albumLabel;
     @FXML
     private Label yearLabel;
+    // Edit Song Text Fields
+    @FXML
+    private TextField editSong;
+    @FXML
+    private TextField editArtist;
+    @FXML 
+    private TextField editAlbum;
+    @FXML
+    private TextField editYear;
     // Add a New Song Text Fields
     @FXML
     private TextField songField;
@@ -108,21 +117,6 @@ public class Controller
             else
                 yearLabel.setText("");
 
-
-            /*
-            try
-            {
-                songLabel.setText(songList.getSelectionModel().getSelectedItem().getName());
-                artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
-                albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
-                yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
-
-            }
-            catch (NullPointerException e)
-            {
-                System.out.println("Caught an Error");
-            }*/
-
         }
     }
 
@@ -160,7 +154,7 @@ public class Controller
             songList.getSelectionModel().select(0); // Selecting first song as default
 
     }
-
+    
     public void removeSong(ActionEvent event)
     {
 
@@ -189,6 +183,22 @@ public class Controller
         {
             alert.close();
         }
+    }
+    
+    public void editSong(ActionEvent event)
+    {
+    	// Set the Song Name and Artist Name Fields if the user has left them empty
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Edit Confirmation");
+    	alert.setHeaderText("Are you sure you want to perform the following changes?");
+    	String content = 
+    			songLabel.getText() + " --> " + editSong.getText() + "\n"
+    			+ artistLabel.getText() + " --> " + editArtist.getText() + "\n"
+    			+ albumLabel.getText() + " --> " + editAlbum.getText() + "\n"
+    			+ yearLabel.getText() + " --> " + editYear.getText() + "\n\n"
+    			+ "Click OK or Cancel";
+    	alert.setContentText(content);
+    	alert.showAndWait();
     }
 
 
