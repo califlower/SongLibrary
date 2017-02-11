@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
+import java.util.Collections;
+import java.util.Optional;
+
 public class Controller {
 	// List View
 	@FXML
@@ -49,11 +52,14 @@ public class Controller {
             artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
             albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
             yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
+
+
+
+
         }
 
-         // Listens for song selection event, changes Song Detail accordingly
+        // Listens for song selection event, changes Song Detail accordingly
         songList.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> songDetail());
-
 
         songList.setCellFactory(lv -> new ListCell<Song>()
         {
@@ -73,10 +79,52 @@ public class Controller {
 	
 	private void songDetail()
 	{
-		 songLabel.setText(songList.getSelectionModel().getSelectedItem().getName());
-		 artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
-		 albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
-		 yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
+        if (!obsList.isEmpty())
+        {
+
+            Song x = songList.getSelectionModel().getSelectedItem();
+
+            if (x == null)
+                return;
+
+            if (x.getName()!=null)
+                songLabel.setText(x.getName());
+            else
+                songLabel.setText("");
+
+
+            if (x.getArtist()!=null)
+                artistLabel.setText(x.getArtist());
+            else
+                artistLabel.setText("");
+
+
+            if (x.getAlbum()!=null)
+                albumLabel.setText(x.getAlbum());
+            else
+                albumLabel.setText("");
+
+            if (x.getYear()!=null)
+                yearLabel.setText(x.getYear());
+            else
+                yearLabel.setText("");
+
+
+            /*
+            try
+            {
+                songLabel.setText(songList.getSelectionModel().getSelectedItem().getName());
+                artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
+                albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
+                yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
+
+            }
+            catch (NullPointerException e)
+            {
+                System.out.println("Caught an Error");
+            }*/
+
+        }
 	}
 	
     public void addSong(ActionEvent event)
@@ -105,12 +153,45 @@ public class Controller {
     	
     	Library.addSong(s); // Adds song to library text file
     	obsList.add(s); // Adds song to observable list whilst application is currently running
+
+        Collections.sort(obsList);
+
+
+
+        if (obsList.size() == 1)
+            songList.getSelectionModel().select(0); // Selecting first song as default
+
     }
     
     public void removeSong(ActionEvent event)
     {
-        Library.removeSong(songList.getSelectionModel().getSelectedIndex());
-        obsList.remove(songList.getSelectionModel().getSelectedIndex());
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Deletion Confirmation");
+        alert.setHeaderText("Are you sure you want to remove the song?");
+        alert.setContentText("Click OK or Cancel");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK)
+        {
+            Library.removeSong(songList.getSelectionModel().getSelectedIndex());
+            obsList.remove(songList.getSelectionModel().getSelectedIndex());
+            alert.close();
+
+            if (obsList.isEmpty())
+            {
+                songLabel.setText("");
+                artistLabel.setText("");
+                albumLabel.setText("");
+                yearLabel.setText("");
+            }
+
+        }
+        else
+        {
+            alert.close();
+        }
     }
     
 

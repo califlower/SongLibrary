@@ -102,7 +102,10 @@ public class Library
             BufferedWriter bWriter = new BufferedWriter(w);
 
             for (Song x : n)
+            {
                 bWriter.write(x.toString());
+                bWriter.newLine();
+            }
 
             bWriter.close();
 
@@ -119,7 +122,7 @@ public class Library
 		ArrayList<Song> n = getList();
 
 		if (n == null)
-			n = new ArrayList<Song>();
+			n = new ArrayList<>();
 
 		n.remove(i);
 		n.add(s);
@@ -134,7 +137,10 @@ public class Library
 			BufferedWriter bWriter = new BufferedWriter(w);
 
 			for (Song x : n)
-				bWriter.write(x.toString());
+            {
+                bWriter.write(x.toString());
+                bWriter.newLine();
+            }
 
 			bWriter.close();
 
