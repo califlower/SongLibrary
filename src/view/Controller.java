@@ -96,26 +96,51 @@ public class Controller
                 return;
 
             if (x.getName() != null)
+            {
                 songLabel.setText(x.getName());
+                editSong.setText(x.getName());
+            }
             else
+            {
                 songLabel.setText("");
+                editSong.setText("");
+            }
+
 
 
             if (x.getArtist() != null)
+            {
                 artistLabel.setText(x.getArtist());
+                editArtist.setText(x.getArtist());
+            }
             else
+            {
                 artistLabel.setText("");
+                editArtist.setText("");
+            }
 
 
             if (x.getAlbum() != null)
+            {
                 albumLabel.setText(x.getAlbum());
+                editAlbum.setText(x.getAlbum());
+            }
             else
+            {
                 albumLabel.setText("");
+                editAlbum.setText("");
+            }
 
             if (x.getYear() != null)
+            {
                 yearLabel.setText(x.getYear());
+                editYear.setText(x.getYear());
+            }
             else
+            {
                 yearLabel.setText("");
+                editYear.setText("");
+            }
 
         }
     }
