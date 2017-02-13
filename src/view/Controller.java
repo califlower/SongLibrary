@@ -27,6 +27,15 @@ public class Controller
     private Label albumLabel;
     @FXML
     private Label yearLabel;
+    // Edit Song Text Fields
+    @FXML
+    private TextField editSong;
+    @FXML
+    private TextField editArtist;
+    @FXML 
+    private TextField editAlbum;
+    @FXML
+    private TextField editYear;
     // Add a New Song Text Fields
     @FXML
     private TextField songField;
@@ -108,7 +117,6 @@ public class Controller
             else
                 yearLabel.setText("");
 
-
         }
     }
 
@@ -125,22 +133,9 @@ public class Controller
             invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
             invalidInput.showAndWait();
             return;
-        }
-
-        else
+        } else
         {
             s = new Song(songField.getText(), artistField.getText(), albumField.getText(), yearField.getText());
-        }
-
-        if (Library.libContains(s))
-        {
-            Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
-            invalidInput.setTitle("Invalid Input");
-            invalidInput.setHeaderText("Unable to add song to the Song Library");
-            invalidInput.setContentText("Duplicate Song");
-            invalidInput.showAndWait();
-            return;
         }
 
 
@@ -159,7 +154,7 @@ public class Controller
             songList.getSelectionModel().select(0); // Selecting first song as default
 
     }
-
+    
     public void removeSong(ActionEvent event)
     {
 
@@ -188,6 +183,22 @@ public class Controller
         {
             alert.close();
         }
+    }
+    
+    public void editSong(ActionEvent event)
+    {
+    	// Set the Song Name and Artist Name Fields if the user has left them empty
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Edit Confirmation");
+    	alert.setHeaderText("Are you sure you want to perform the following changes?");
+    	String content = 
+    			songLabel.getText() + " --> " + editSong.getText() + "\n"
+    			+ artistLabel.getText() + " --> " + editArtist.getText() + "\n"
+    			+ albumLabel.getText() + " --> " + editAlbum.getText() + "\n"
+    			+ yearLabel.getText() + " --> " + editYear.getText() + "\n\n"
+    			+ "Click OK or Cancel";
+    	alert.setContentText(content);
+    	alert.showAndWait();
     }
 
 
