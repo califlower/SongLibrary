@@ -64,6 +64,12 @@ public class Controller
             yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
 
 
+            editSong.setText(songList.getSelectionModel().getSelectedItem().getName());
+            editArtist.setText(songList.getSelectionModel().getSelectedItem().getArtist());
+            editAlbum.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
+            editYear.setText(songList.getSelectionModel().getSelectedItem().getYear());
+
+
         }
 
         // Listens for song selection event, changes Song Detail accordingly
@@ -214,6 +220,11 @@ public class Controller
                 artistLabel.setText("");
                 albumLabel.setText("");
                 yearLabel.setText("");
+
+                editSong.setText("");
+                editArtist.setText("");
+                editAlbum.setText("");
+                editYear.setText("");
             }
 
         } else
