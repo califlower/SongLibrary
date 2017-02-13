@@ -109,20 +109,6 @@ public class Controller
                 yearLabel.setText("");
 
 
-            /*
-            try
-            {
-                songLabel.setText(songList.getSelectionModel().getSelectedItem().getName());
-                artistLabel.setText(songList.getSelectionModel().getSelectedItem().getArtist());
-                albumLabel.setText(songList.getSelectionModel().getSelectedItem().getAlbum());
-                yearLabel.setText(songList.getSelectionModel().getSelectedItem().getYear());
-
-            }
-            catch (NullPointerException e)
-            {
-                System.out.println("Caught an Error");
-            }*/
-
         }
     }
 
@@ -139,9 +125,22 @@ public class Controller
             invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
             invalidInput.showAndWait();
             return;
-        } else
+        }
+
+        else
         {
             s = new Song(songField.getText(), artistField.getText(), albumField.getText(), yearField.getText());
+        }
+
+        if (Library.libContains(s))
+        {
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Invalid Input");
+            invalidInput.setHeaderText("Unable to add song to the Song Library");
+            invalidInput.setContentText("Duplicate Song");
+            invalidInput.showAndWait();
+            return;
         }
 
 

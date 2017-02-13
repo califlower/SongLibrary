@@ -146,4 +146,21 @@ public class Library
         }
 
     }
+    public static boolean libContains(Song s)
+    {
+        ArrayList<Song> n = getList();
+
+        if (n == null)
+            return false;
+        else if (n.isEmpty())
+            return false;
+
+        for (Song x: n)
+        {
+            if (s.getName().compareTo(x.getName()) == 0 && s.getArtist().compareTo(x.getName()) == 0)
+                return true;
+        }
+
+        return false;
+    }
 }
