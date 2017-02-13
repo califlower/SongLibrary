@@ -32,7 +32,7 @@ public class Controller
     private TextField editSong;
     @FXML
     private TextField editArtist;
-    @FXML 
+    @FXML
     private TextField editAlbum;
     @FXML
     private TextField editYear;
@@ -105,21 +105,18 @@ public class Controller
             {
                 songLabel.setText(x.getName());
                 editSong.setText(x.getName());
-            }
-            else
+            } else
             {
                 songLabel.setText("");
                 editSong.setText("");
             }
 
 
-
             if (x.getArtist() != null)
             {
                 artistLabel.setText(x.getArtist());
                 editArtist.setText(x.getArtist());
-            }
-            else
+            } else
             {
                 artistLabel.setText("");
                 editArtist.setText("");
@@ -130,8 +127,7 @@ public class Controller
             {
                 albumLabel.setText(x.getAlbum());
                 editAlbum.setText(x.getAlbum());
-            }
-            else
+            } else
             {
                 albumLabel.setText("");
                 editAlbum.setText("");
@@ -141,8 +137,7 @@ public class Controller
             {
                 yearLabel.setText(x.getYear());
                 editYear.setText(x.getYear());
-            }
-            else
+            } else
             {
                 yearLabel.setText("");
                 editYear.setText("");
@@ -154,6 +149,7 @@ public class Controller
     public void addSong(ActionEvent event)
     {
         Song s;
+
         if (songField.getText().isEmpty() || artistField.getText().isEmpty())
         {
             // Prompt user to enter a song name and/or artist name
@@ -182,10 +178,6 @@ public class Controller
         }
 
 
-    	
-    	/* ADD A WAY TO CHECK FOR AN ATTEMPT TO ADD DUPLICATE ENTRIES; MAYBE TURN LIBRARY.ADDSONG TO CHECK AND RETURN A -1 IF FAILED
-         * CHECK RETURN VALUE OF LIBRARY.ADDSONG AND HANDLE WITH A PROMPT TO THE USER
-    	 */
 
         Library.addSong(s); // Adds song to library text file
         obsList.add(s); // Adds song to observable list whilst application is currently running
@@ -197,7 +189,7 @@ public class Controller
             songList.getSelectionModel().select(0); // Selecting first song as default
 
     }
-    
+
     public void removeSong(ActionEvent event)
     {
 
@@ -232,21 +224,73 @@ public class Controller
             alert.close();
         }
     }
-    
+
     public void editSong(ActionEvent event)
     {
-    	// Set the Song Name and Artist Name Fields if the user has left them empty
-    	Alert alert = new Alert(AlertType.CONFIRMATION);
-    	alert.setTitle("Edit Confirmation");
-    	alert.setHeaderText("Are you sure you want to perform the following changes?");
-    	String content = 
-    			songLabel.getText() + " --> " + editSong.getText() + "\n"
-    			+ artistLabel.getText() + " --> " + editArtist.getText() + "\n"
-    			+ albumLabel.getText() + " --> " + editAlbum.getText() + "\n"
-    			+ yearLabel.getText() + " --> " + editYear.getText() + "\n\n"
-    			+ "Click OK or Cancel";
-    	alert.setContentText(content);
-    	alert.showAndWait();
+        if (obsList.isEmpty())
+        {
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Cannot Edit");
+            invalidInput.setHeaderText("Empty library");
+            invalidInput.setContentText("Please make sure to have songs in the library");
+            invalidInput.showAndWait();
+            return;
+        }
+        else
+        {
+            // Set the Song Name and Artist Name Fields if the user has left them empty
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Edit Confirmation");
+            alert.setHeaderText("Are you sure you want to edit the song?");
+            alert.setContentText("Click OK or Cancel");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+
+            if (result.get() != ButtonType.OK)
+                return;
+        }
+
+        Song s;
+
+        if (editSong.getText().isEmpty() || editArtist.getText().isEmpty())
+        {
+            // Prompt user to enter a song name and/or artist name
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Invalid Input");
+            invalidInput.setHeaderText("Unable to edit song in the Song Library");
+            invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
+            invalidInput.showAndWait();
+            return;
+        }
+        else
+        {
+            s = new Song(editSong.getText(), editArtist.getText(), editAlbum.getText(), editYear.getText());
+        }
+
+        if (Library.libContains(s))
+        {
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Invalid Input");
+            invalidInput.setHeaderText("Unable to edit song to the Song Library");
+            invalidInput.setContentText("Duplicate Song");
+            invalidInput.showAndWait();
+            return;
+        }
+
+        Library.editSong(s, songList.getSelectionModel().getSelectedIndex());
+        obsList.set(songList.getSelectionModel().getSelectedIndex(), s); // Adds song to observable list whilst application is currently running
+
+        Collections.sort(obsList);
+
+
+        if (obsList.size() == 1)
+            songList.getSelectionModel().select(0); // Selecting first song as default
+
+
     }
 
 
