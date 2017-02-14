@@ -193,6 +193,18 @@ public class Controller
     public void removeSong(ActionEvent event)
     {
 
+        if (obsList.isEmpty())
+        {
+            Alert invalidInput = new Alert(AlertType.INFORMATION);
+            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
+            invalidInput.setTitle("Can not remove");
+            invalidInput.setHeaderText("Empty library");
+            invalidInput.setContentText("Please make sure to have songs in the library");
+            invalidInput.showAndWait();
+            return;
+        }
+
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Deletion Confirmation");
         alert.setHeaderText("Are you sure you want to remove the song?");
@@ -231,7 +243,7 @@ public class Controller
         {
             Alert invalidInput = new Alert(AlertType.INFORMATION);
             //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
-            invalidInput.setTitle("Cannot Edit");
+            invalidInput.setTitle("Can not Edit");
             invalidInput.setHeaderText("Empty library");
             invalidInput.setContentText("Please make sure to have songs in the library");
             invalidInput.showAndWait();
