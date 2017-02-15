@@ -180,6 +180,7 @@ public class Controller
 
 
 
+
         Library.addSong(s); // Adds song to library text file
         obsList.add(s); // Adds song to observable list whilst application is currently running
 
@@ -282,14 +283,19 @@ public class Controller
             s = new Song(editSong.getText(), editArtist.getText(), editAlbum.getText(), editYear.getText());
         }
 
-        if (Library.libContains(s))
+        Song x = songList.getSelectionModel().getSelectedItem();
+
+        if (x.getName().compareToIgnoreCase(s.getName()) != 0 || x.getArtist().compareToIgnoreCase(s.getArtist())!= 0)
         {
-            Alert invalidInput = new Alert(AlertType.INFORMATION);
-            invalidInput.setTitle("Invalid Input");
-            invalidInput.setHeaderText("Unable to edit song to the Song Library");
-            invalidInput.setContentText("Duplicate Song");
-            invalidInput.showAndWait();
-            return;
+            if (Library.libContains(s))
+            {
+                Alert invalidInput = new Alert(AlertType.INFORMATION);
+                invalidInput.setTitle("Invalid Input");
+                invalidInput.setHeaderText("Unable to edit song to the Song Library");
+                invalidInput.setContentText("Duplicate Song");
+                invalidInput.showAndWait();
+                return;
+            }
         }
 
         Library.editSong(s, songList.getSelectionModel().getSelectedIndex());
