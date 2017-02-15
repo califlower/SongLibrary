@@ -154,7 +154,6 @@ public class Controller
         {
             // Prompt user to enter a song name and/or artist name
             Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
             invalidInput.setTitle("Invalid Input");
             invalidInput.setHeaderText("Unable to add song to the Song Library");
             invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
@@ -169,7 +168,6 @@ public class Controller
         if (Library.libContains(s))
         {
             Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
             invalidInput.setTitle("Invalid Input");
             invalidInput.setHeaderText("Unable to add song to the Song Library");
             invalidInput.setContentText("Duplicate Song");
@@ -183,11 +181,8 @@ public class Controller
         obsList.add(s); // Adds song to observable list whilst application is currently running
 
         Collections.sort(obsList);
-
-
-        if (obsList.size() == 1)
-            songList.getSelectionModel().select(0); // Selecting first song as default
-
+        
+        songList.getSelectionModel().select(s);
     }
 
     public void removeSong(ActionEvent event)
@@ -214,8 +209,13 @@ public class Controller
 
         if (result.get() == ButtonType.OK)
         {
-            Library.removeSong(songList.getSelectionModel().getSelectedIndex());
-            obsList.remove(songList.getSelectionModel().getSelectedIndex());
+        	int remove = songList.getSelectionModel().getSelectedIndex(); // index of song to be deleted
+        	if(remove != obsList.size() - 1) // select the next song if there is one and if not the previous song will be selected
+        	{
+        		songList.getSelectionModel().selectNext();
+        	}
+            Library.removeSong(remove);
+            obsList.remove(remove);
             alert.close();
 
             if (obsList.isEmpty())
@@ -230,7 +230,6 @@ public class Controller
                 editAlbum.setText("");
                 editYear.setText("");
             }
-
         } else
         {
             alert.close();
@@ -242,7 +241,6 @@ public class Controller
         if (obsList.isEmpty())
         {
             Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
             invalidInput.setTitle("Can not Edit");
             invalidInput.setHeaderText("Empty library");
             invalidInput.setContentText("Please make sure to have songs in the library");
@@ -270,7 +268,6 @@ public class Controller
         {
             // Prompt user to enter a song name and/or artist name
             Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
             invalidInput.setTitle("Invalid Input");
             invalidInput.setHeaderText("Unable to edit song in the Song Library");
             invalidInput.setContentText("Please make sure to enter the Song Name and Artist Name");
@@ -285,7 +282,6 @@ public class Controller
         if (Library.libContains(s))
         {
             Alert invalidInput = new Alert(AlertType.INFORMATION);
-            //invalidInput.initOwner(maingStage); FIND OUT IF THIS IS NECESSARY
             invalidInput.setTitle("Invalid Input");
             invalidInput.setHeaderText("Unable to edit song to the Song Library");
             invalidInput.setContentText("Duplicate Song");

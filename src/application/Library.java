@@ -157,7 +157,7 @@ public class Library
 
         for (Song x: n)
         {
-            if (s.getName().compareTo(x.getName()) == 0 && s.getArtist().compareTo(x.getName()) == 0)
+            if (s.getName().compareToIgnoreCase(x.getName()) == 0 && s.getArtist().compareToIgnoreCase(x.getArtist()) == 0)
                 return true;
         }
 
