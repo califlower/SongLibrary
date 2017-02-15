@@ -1,3 +1,6 @@
+/*
+ * Arturo Corro & Calin Gilan
+ */
 package application;
 import java.io.IOException;
 

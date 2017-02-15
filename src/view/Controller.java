@@ -1,3 +1,6 @@
+/*
+ * Arturo Corro & Calin Gilan
+ */
 package view;
 
 import application.Library;

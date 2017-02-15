@@ -1,3 +1,6 @@
+/*
+ * Arturo Corro & Calin Gilan
+ */
 package application;
 
 public class Song implements songInterface, Comparable<Song> {
